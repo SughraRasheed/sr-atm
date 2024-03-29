@@ -44,7 +44,7 @@ if (operationAns.operation === "fast cash") {
             name: "fastCash",
             type: "list",
             message: "Select your amount to fastCash",
-            choices: [1000, 2000, 5000, 10000, 20000]
+            choices: [1000, 2000, 5000, 10000,]
         }]);
     if (fastCashAns.fastCash > myBalance) {
         console.log("Insufficient balance");
