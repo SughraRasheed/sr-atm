@@ -1,3 +1,4 @@
+#! /usr/bin/env node
 import inquirer from "inquirer";
 let myBalance = 10000;
 let myPin = 1234;
@@ -18,7 +19,7 @@ let operationAns = await inquirer.prompt([{
         name: "operation",
         type: "list",
         message: "Select your operation",
-        choices: ["withdraw", "check balance"]
+        choices: ["withdraw", "check balance", "fast cash"]
     }]);
 if (operationAns.operation === "withdraw") {
     let amountAnswer = await inquirer.prompt([{
@@ -31,10 +32,25 @@ if (operationAns.operation === "withdraw") {
     }
     else {
         myBalance -= amountAnswer.amount;
-        console.log("Your remaining new balance is " + myBalance);
+        console.log(`Your remaining new balance is ${myBalance}`);
     }
 }
 ;
 if (operationAns.operation === "check balance") {
-    console.log("Your current balance is " + myBalance);
+    console.log(`Your current balance is ${myBalance}`);
+}
+if (operationAns.operation === "fast cash") {
+    let fastCashAns = await inquirer.prompt([{
+            name: "fastCash",
+            type: "list",
+            message: "Select your amount to fastCash",
+            choices: [1000, 2000, 5000, 10000, 20000]
+        }]);
+    if (fastCashAns.fastCash > myBalance) {
+        console.log("Insufficient balance");
+    }
+    else {
+        myBalance -= fastCashAns.fastCash;
+    }
+    console.log(`Your remaining new balance is ${myBalance} `);
 }
